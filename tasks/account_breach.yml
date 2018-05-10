@@ -1,0 +1,27 @@
+---
+# API reference: https://haveibeenpwned.com/API/v2
+# Security breaches - per account
+# GET https://haveibeenpwned.com/api/v2/breachedaccount/{account}
+# reduce with ?truncateResponse=true
+# filter by domain: ?domain=adobe.com
+# include unverified breaches? ?includeUnverified=true
+#
+
+- name: Query breaches per account
+  uri:
+    url: "https://haveibeenpwned.com/api/v2/breachedaccount/{{ account }}"
+    return_content: yes
+  register: account_breach_output
+  when: lookup == 'account_breach'
+
+- name: Debug breaches per account output
+  debug:
+    var: account_breach_output
+  when: 
+    - debug is defined
+    - account_breach_output is defined
+
+- name: Fail if "{{ account }}" is found in breached account list
+  fail:
+    msg: "Account {{ account }} was found in {{ account_breach_output.json | length }} breaches"
+  when: account_breach_output.json is defined

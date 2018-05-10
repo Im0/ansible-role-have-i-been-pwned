@@ -1,0 +1,17 @@
+---
+# tasks file for ansible-role-have-i-been-pwned
+#
+
+- name: haveibeenpwned > Breached account lookup
+  include_tasks: account_breach.yml
+  when: lookup == 'account_breach'
+
+- name: haveibeenpwned > Password lookup
+  include_tasks: password_lookup.yml
+  when: lookup == 'password'
+
+# TODO:
+# Pastes from an account
+# https://haveibeenpwned.com/api/v2/pasteaccount/[account]
+
+

@@ -1,5 +1,5 @@
 galaxy_info:
-  author: John Imison
+  author: 'John Imison'
   description: 'Queries Troy Hunt's haveibeenpwned database via API'
   company: your company (optional)
 
